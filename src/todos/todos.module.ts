@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TodoSchema} from './todo.model';
@@ -11,7 +12,7 @@ import { TodosService } from './todos.service';
         name :'Todo' ,
         schema : TodoSchema ,
       }]
-    )
+    ),HttpModule
   ],
   controllers: [TodosController],
   providers: [TodosService],
