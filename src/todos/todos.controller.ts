@@ -1,20 +1,24 @@
-import {  Body, Controller, Delete, Get,  Patch, Post, Query } from '@nestjs/common';
-import {  ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodosService } from './todos.service';
 @ApiTags('To Do List')
-@Controller()
+@Controller('/todos')
 export class TodosController {
+  constructor(private todosService: TodosService) {}
 
-    constructor (private todosService : TodosService      ){}
-
-
-    // CRUD
+  // CRUD
   @Post()
-  create(
-    @Body() todo: CreateTodoDto
-  ) {
+  create(@Body() todo: CreateTodoDto) {
     return this.todosService.create(todo);
   }
 
@@ -24,17 +28,14 @@ export class TodosController {
   }
 
   @Patch()
-  update(
-    @Body() todo: UpdateTodoDto
-  ) {
+  update(@Body() todo: UpdateTodoDto) {
     return this.todosService.update(todo);
-  }
+  } 
 
-  @Delete()
-  delete(
-    @Query('id') id: string
-  ) {
-    return this.todosService.delete(id)
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    console.log('iciii');
+    
+    return this.todosService.delete(id);
   }
-
 }

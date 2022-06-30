@@ -1,5 +1,6 @@
 export class UpdateTodoDto {
     id: string;
     description: string;
-    completed: boolean;
+    day: string;
+    reminder :boolean;
   }

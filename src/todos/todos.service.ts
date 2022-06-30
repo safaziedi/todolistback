@@ -29,9 +29,6 @@ export class TodosService {
 
       async delete(prodId: string) {
         const result = await this.TodoModel.deleteOne({ _id: prodId }).exec();
-        if (result.deletedCount === 0) {
-          throw new NotFoundException('Could not find task.');
-        }
       }
     
     }
